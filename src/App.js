@@ -3,17 +3,19 @@ import './App.css';
 
 function App() {
   const [data, setData] = useState({})
+  const [count, setCount] = useState(1)
 
-  React.useEffect(() => {
-    console.log("it's working")
-      fetch('https://swapi.dev/api/people/1')
+  useEffect(() => {
+      fetch(`https://swapi.dev/api/people/${count}`)
         .then((res) => res.json())
         .then((newdata) => setData(newdata))
-  }, [])
+  }, [count])
 
   return (
     <div className="App">
       <pre>{JSON.stringify(data, null, 2)}</pre>
+      <p>{count}</p>
+      <button onClick={() => setCount(prev => count + 1)}>Add</button>
     </div>
   );
 }
